@@ -26,18 +26,18 @@ public class PigLatin {
         }
     }
 
-    public int findFirstA(String word){
-        for(int i = 0; i < word.length(); i++) {
-            if(word.substring(i,i+1).equals("a")) {
+    public int findFirstA(String word) {
+        for (int i = 0; i < word.length(); i++) {
+            if (word.substring(i, i + 1).equals("a")) {
                 return i;
             }
         }
         return -1;
     }
 
-    public int findFirstAorB(String word){
-        for(int i = 0; i < word.length(); i++) {
-            if(word.substring(i,i+1).equals("a") || word.substring(i,i+1).equals("b")) {
+    public int findFirstAorB(String word) {
+        for (int i = 0; i < word.length(); i++) {
+            if (word.substring(i, i + 1).equals("a") || word.substring(i, i + 1).equals("b")) {
                 return i;
             }
         }
@@ -61,6 +61,12 @@ public class PigLatin {
             return word + "ay";
         } else if (vowelIndex == 0) { // Starts with a vowel
             return word + "way";
+        } else if (vowelIndex > 0 && vowelIndex + 1 < word.length() 
+                   && word.substring(vowelIndex - 1, vowelIndex + 1).equals("qu")) { 
+            // Handles "qu" as a single consonant sound
+            String prefix = word.substring(0, vowelIndex + 1); // Includes "qu"
+            String rest = word.substring(vowelIndex + 1);
+            return rest + prefix + "ay";
         } else { // Vowel is in the middle or end
             String prefix = word.substring(0, vowelIndex);
             String rest = word.substring(vowelIndex);
